@@ -5,6 +5,7 @@ import { Menu } from 'antd'
 import IconFont from '@/components/basics/IconFont'
 import { ResponsiveContext } from '@/context'
 import { adminRoutes } from '@/routes'
+import { eventEmitter } from '@/utils/EventEmitter'
 const {SubMenu, Item} = Menu
 
 class Sidebar extends Component {
@@ -171,7 +172,7 @@ class Sidebar extends Component {
     * 监听事件分发处理sidebar状态
     */
    EventEmitterListener() {
-      React.$eventEmitter.on('changeSidebarState', () => {
+      eventEmitter.on('changeSidebarState', () => {
          this.setState(state => {
             return { sidebarState: !state.sidebarState }
          })
@@ -204,7 +205,7 @@ class Sidebar extends Component {
     }
 
    componentWillUnmount() {
-      React.$eventEmitter.removeAllListeners('changeSidebarState')
+      eventEmitter.removeAllListeners('changeSidebarState')
    }
    render() {
 

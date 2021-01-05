@@ -5,6 +5,7 @@ import { UserOutlined, LockOutlined } from '@ant-design/icons'
 import LazyLoading from '@/components/basics/LazyLoading'
 import ErrorBoundary from '@/components/basics/ErrorBoundary'
 import { ResponsiveContext } from '@/context'
+import { setToken } from '@/utils/public'
 const WebGLbg = React.lazy(() => import('@/components/basics/WebGLbg'))
 const Timer = React.lazy(() => import('@/components/basics/Timer'))
 
@@ -13,7 +14,7 @@ class Login extends Component {
 
    handleSubmit(values) {
       if (values.username === 'Tadpole' && values.password === 'admin') {
-         React.$setToken('Tadpole')
+         setToken('Tadpole')
          message.success('登录成功！')
          this.props.history.push('/admin')
       } else message.error('登录失败！用户名和密码不匹配')

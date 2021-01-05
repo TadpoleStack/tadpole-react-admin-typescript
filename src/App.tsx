@@ -14,16 +14,14 @@ import LazyLoading from '@/components/basics/LazyLoading'
 import ErrorBoundary from '@/components/basics/ErrorBoundary'
 import { mainRoutes } from '@/routes'
 import { ResponsiveContext } from '@/context'
+import { evil, getToken } from '@/utils/public'
 const Admin = React.lazy(() => import('@/components/business/Admin'))
 // const AuthRoute = React.lazy(() => import('@/components/basics/AuthRoute'))
 
 class App extends React.Component {
-   constructor(props) {
-      super(props)
-      this.state = {
+      state = {
          ResponsiveValue: 'PC',
       }
-   }
    /**
     * 计算窗口宽度-对应响应的响应设备
     */
@@ -31,9 +29,9 @@ class App extends React.Component {
       const responsiveDevice = { 'PC': 'curr>=992', 'MOBILE': 'curr<992' }
       const width = (document.body && document.body.clientWidth) || (document.documentElement && document.documentElement.clientWidth) || (window && window.innerWidth)
       for (let item in responsiveDevice) {
-         let element = responsiveDevice[item];
+         let element = (responsiveDevice as any)[item];
          element = element.replace('curr', width)
-         element && React.$evil(element) && this.setState({ ResponsiveValue: item })
+         element && evil(element) && this.setState({ ResponsiveValue: item })
       }
    }
    componentDidMount() {
@@ -48,12 +46,12 @@ class App extends React.Component {
                   <ErrorBoundary>
                      <React.Suspense fallback={<LazyLoading style={{ zIndex: 10000, position: 'fixed' }} />}>
                         <Switch>
-                           <Route path="/admin" render={routeProps => React.$getToken()
+                           <Route path="/admin" render={routeProps => getToken()
                               ?<Admin {...routeProps}></Admin>
                               :<Redirect to="/login" />
                            }></Route>
                            {
-                              mainRoutes.map((route, index) => {
+                              mainRoutes.map((route: any, index: number) => {
                                  return <Route {...route} key={index}></Route>
                               })
                            }

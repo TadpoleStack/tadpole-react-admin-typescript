@@ -5,6 +5,7 @@ import './index.scss'
 import LazyLoading from '@/components/basics/LazyLoading'
 import ErrorBoundary from '@/components/basics/ErrorBoundary'
 import { adminRoutes } from '@/routes'
+import { getToken } from '@/utils/public'
 const Header = React.lazy(() => import('@/components/basics/Header'))
 const Sidebar = React.lazy(() => import('@/components/basics/Sidebar'))
 // const AuthRoute = React.lazy(() => import('@/components/basics/AuthRoute'))
@@ -66,7 +67,7 @@ class Admin extends Component {
                               <CSSTransition style={{height:'100%'}} key={location.pathname} classNames="fade" timeout={300}>
                                  <Switch location={location}>
                                  {
-                                    React.$getToken()
+                                    getToken()
                                        ? <RouterView routes={adminRoutes}></RouterView>
                                        : <Redirect to="/login" />
                                  }

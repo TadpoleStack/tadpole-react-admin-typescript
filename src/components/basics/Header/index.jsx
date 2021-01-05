@@ -5,6 +5,8 @@ import { Button, Avatar, Popover} from 'antd'
 import { MenuFoldOutlined } from '@ant-design/icons'
 import './index.scss'
 import {ResponsiveContext} from '@/context'
+import { clearToken } from '@/utils/public'
+import { eventEmitter } from '@/utils/EventEmitter'
 
 class Header extends Component {
     static contextType = ResponsiveContext;
@@ -16,11 +18,11 @@ class Header extends Component {
         }
     }
     loginOut = ()=>{
-        React.$clearToken()
+        clearToken()
         this.props.history.replace('/')
     }
     changeSidebarState() {
-      React.$eventEmitter.emit('changeSidebarState')
+      eventEmitter.emit('changeSidebarState')
     }
     render() {
         const LoginOutView = ()=> {
