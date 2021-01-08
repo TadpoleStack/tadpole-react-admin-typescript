@@ -1,7 +1,11 @@
 import React from "react";
 import { Route, Redirect } from "react-router-dom";
 import { getToken } from "utils/public";
-export default class AutnRoute extends React.Component {
+
+interface propsType{
+  route:any
+}
+export default class AutnRoute extends React.Component<propsType> {
   render() {
     console.info(this.props.route);
     return getToken() ? (

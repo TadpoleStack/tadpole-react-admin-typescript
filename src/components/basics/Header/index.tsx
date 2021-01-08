@@ -7,11 +7,14 @@ import './index.scss'
 import {ResponsiveContext} from '@/context'
 import { clearToken } from '@/utils/public'
 import { eventEmitter } from '@/utils/EventEmitter'
-
-class Header extends Component {
+interface propsType{
+    [propName:string]: any
+}
+class Header extends Component<propsType> {
     static contextType = ResponsiveContext;
 
-    constructor(props) {
+    state: any = {}
+    constructor(props: propsType) {
         super(props)
         this.state = {
             height: this.props.height || '60px',
@@ -72,4 +75,4 @@ class Header extends Component {
     }
 }
 
-export default withRouter(Header)
+export default withRouter(Header as any)
