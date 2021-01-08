@@ -8,10 +8,10 @@ import { adminRoutes } from '@/routes'
 import { eventEmitter } from '@/utils/EventEmitter'
 const {SubMenu, Item} = Menu
 
-class Sidebar extends Component {
+class Sidebar extends Component<any,any> {
    static contextType = ResponsiveContext;
-
-   constructor(props) {
+   state: any = {}
+   constructor(props: any) {
       super(props)
       this.state = {
          width: this.props.width || '200px',
@@ -47,16 +47,6 @@ class Sidebar extends Component {
                      icon: 'Tadpoletubiao',
                      text: 'EchartsMap'
                   },
-                  // {
-                  //    key: '/admin/highcharts',
-                  //    icon: 'Tadpoletubiaozhexiantu',
-                  //    text: 'HighCharts'
-                  // },
-                  // {
-                  //    key: '/admin/recharts',
-                  //    icon: 'Tadpoletubiao1',
-                  //    text: 'ReCharts'
-                  // }
                ]
             },
             {
@@ -140,7 +130,7 @@ class Sidebar extends Component {
     * 点击跳转路由
     * @param {*} e 
     */
-   handleClick = e => {
+   handleClick = (e: any): void => {
       if (e.keyPath.length < 2) this.setState({ openKeys: [] })
       this.props.history.push(e.key)
       this.setState({ current: e.key })
@@ -151,13 +141,13 @@ class Sidebar extends Component {
     * 侧边栏折叠
     * @param {*} openKeys 
     */
-   // handleOpenChange = openKeys => {
+   handleOpenChange = (openKeys: any): void => {
    //    if (openKeys[openKeys.length - 1]) {
    //       this.setState({ openKeys: [openKeys[openKeys.length - 1]] })
    //    } else {
    //       this.setState({ openKeys: [] })
    //    }
-   // }
+   }
    /**
     * 初始化设置sidebar的高亮状态及展开项
     */
@@ -173,7 +163,7 @@ class Sidebar extends Component {
     */
    EventEmitterListener() {
       eventEmitter.on('changeSidebarState', () => {
-         this.setState(state => {
+         this.setState((state: any) => {
             return { sidebarState: !state.sidebarState }
          })
       })
@@ -186,11 +176,11 @@ class Sidebar extends Component {
       })
       // this.initSidebarState()
    }
-   renderMenu = (props) => {
+   renderMenu = (props: any) => {
       const routes = props.routes
       const currRootPath = props.rootPath?props.rootPath:''
       return(
-         routes.map(route => {
+         routes.map((route: any) => {
             const nextRootPath = currRootPath+route.path
             return route.children
             ? <SubMenu

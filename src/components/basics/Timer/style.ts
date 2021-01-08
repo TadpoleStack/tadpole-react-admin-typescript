@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-export const TimerWrap = styled.div`
+export const TimerWrap = styled.div<{style:object,cell:{width:number}}>`
    display:flex;
    overflow:hidden;
    width:${props => props.style.width}px;
