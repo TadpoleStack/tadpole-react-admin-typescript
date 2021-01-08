@@ -8,6 +8,7 @@ import { ResponsiveContext } from "@/context";
 import { clearToken } from "@/utils/public";
 import { eventEmitter } from "@/utils/EventEmitter";
 interface propsType {
+  height?: string;
   [propName: string]: any;
 }
 class Header extends Component<propsType> {

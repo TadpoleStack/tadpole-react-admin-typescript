@@ -10,11 +10,11 @@ const Header = React.lazy(() => import('@/components/basics/Header'))
 const Sidebar = React.lazy(() => import('@/components/basics/Sidebar'))
 // const AuthRoute = React.lazy(() => import('@/components/basics/AuthRoute'))
 
-const RouterView = (props) => {
+const RouterView = (props: any) => {
    const routes = props.routes
    const currRootPath = props.rootPath?props.rootPath:''
    return (
-      routes.map((route, index) =>{
+      routes.map((route: any, index: number) =>{
          const nextRootPath = currRootPath+route.path
          return (
             route.children
@@ -31,20 +31,18 @@ const RouterView = (props) => {
 }
 
 class Admin extends Component {
-   constructor(props) {
-      super(props)
-      this.state = {
-         windowWidth: window.innerWidth + 'px',
-         headerHeight: '60px',
-         sidebarWidth: '200px',
-      }
+   state: any = {
+      windowWidth: window.innerWidth + 'px',
+      headerHeight: '60px',
+      sidebarWidth: '200px',
    }
    render() {
-      const {location} = this.props
+      const {location} = (this.props as any)
       return (
          <div style={{ width: '100%', height: '100%' }}>
             <Header
-               height={this.state.headerHeight}
+               // height={this.state.headerHeight}
+               {...{height:this.state.headerHeight}}
             />
             <div
                style={{
@@ -84,4 +82,4 @@ class Admin extends Component {
    }
 }
 
-export default withRouter(Admin)
+export default withRouter((Admin as any))

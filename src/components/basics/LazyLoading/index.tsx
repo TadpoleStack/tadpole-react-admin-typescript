@@ -3,7 +3,7 @@ import { Spin } from "antd";
 import { LoadingOutlined } from "@ant-design/icons";
 
 interface propsType {
-  style: object;
+  style?: object;
 }
 export default class LazyLoading extends Component<propsType, object> {
   state = {
